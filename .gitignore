@@ -195,4 +195,4 @@ dmypy.json
 .pyre/
 
 /.idea/
-/data/
+/data/train/train.tfrecords
