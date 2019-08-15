@@ -1,7 +1,6 @@
 import tensorflow as tf
 from PIL import Image
 import os
-import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -82,18 +81,3 @@ if __name__ == '__main__':
         create_record('data/train', './data/train/train.tfrecords')
     else:
         print('TFRecords already exists!')
-
-    img, label = read_record('./data/train/train.tfrecords', 1)
-    sess = tf.Session()
-    tf.train.start_queue_runners(sess=sess)
-    x, y = sess.run([img, label])
-
-    x = np.reshape(x, (512, 512))
-    y = np.reshape(y, (512, 512))
-    fig, ax = plt.subplots(1, 2)
-    ax[0].imshow(x)
-    ax[0].axis('off')
-
-    ax[1].imshow(y, cmap='gray')
-    ax[1].axis('off')
-    plt.show()

@@ -186,7 +186,7 @@ class UNet(object):
         standard = tf.image.per_image_standardization(self.images)
 
         for n in range(0, 30):
-            img = os.path.join('data/train/image/', str(n) + '.png')
+            img = os.path.join('data/test/', str(n) + '.png')
             img = Image.open(img)
             img = np.array(img)
             img = np.reshape(img, (1, 512, 512, 1))
@@ -207,4 +207,4 @@ class UNet(object):
             label = label * 255
             print(n)
             im = Image.fromarray(label.astype('uint8'))
-            im.save(os.path.join('data/train/predict/', str(n) + '.png'))
+            im.save(os.path.join('data/test/', str(n) + '.png'))
