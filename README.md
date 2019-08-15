@@ -1,5 +1,5 @@
 # unet-tf
-Unet networks implemented by tensorflow for Cell Edge Detecting. The dataset is from [ISBI Challenge](http://brainiac2.mit.edu/isbi_challenge/). There are only 30 images, so Data Augmentation has been done by tensorflow API.
+Unet networks implemented by tensorflow for **Cell Edge Detecting**. The dataset is from [ISBI Challenge](http://brainiac2.mit.edu/isbi_challenge/). There are only 30 512*512 images, so Data Augmentation has been done by tensorflow API.
 
 
 
