@@ -68,3 +68,15 @@ if __name__ == '__main__':
 <img src="https://github.com/lzyhha/unet-tf/raw/master/data/test/26.png"/>
 
 <img src="https://github.com/lzyhha/unet-tf/raw/master/data/predict/26.png"/>
+
+
+
+## Dependencies
+
+- **Numpy**
+- **PIL**
+- **tensorflow (tensorflow-gpu)**
+- **os**
+
+These packages are available via **pip install**.
+
