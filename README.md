@@ -61,3 +61,10 @@ if __name__ == '__main__':
     model.predicts()
 ```
 
+
+
+## Results
+
+<img src="https://github.com/lzyhha/unet-tf/raw/master/data/test/26.png"/>
+
+<img src="https://github.com/lzyhha/unet-tf/raw/master/data/predict/26.png"/>
