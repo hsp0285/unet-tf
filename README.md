@@ -39,7 +39,9 @@ Due to the batch normalization layer, 'is_training=True' should be set during tr
 
   ```python
   if __name__ == '__main__':    
-      if not os.path.exists('./data/train/train.tfrecords'):        				create_record('data/train', './data/train/train.tfrecords')    		else:        
+      if not os.path.exists('./data/train/train.tfrecords'):        				
+          create_record('data/train', './data/train/train.tfrecords')    		
+      else:        
           print('TFRecords already exists!')
   ```
 
