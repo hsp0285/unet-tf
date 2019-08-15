@@ -2,13 +2,14 @@ import tensorflow as tf
 from PIL import Image
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def create_record(data_path, records_path):
     writer = tf.io.TFRecordWriter(records_path)
     for n in range(0, 30):
-        img = os.path.join(data_path,  'image', str(n) + '.png')
-        label = os.path.join(data_path,  'label',  str(n) + '.png')
+        img = os.path.join(data_path, 'image', str(n) + '.png')
+        label = os.path.join(data_path, 'label', str(n) + '.png')
         img = Image.open(img)
         label = Image.open(label)
         img = img.resize((512, 512))
@@ -53,12 +54,7 @@ def read_record(filename, batch_size):
     img = tf.reshape(img, [512, 512, 1])
     label = tf.reshape(label, [512, 512, 1])
 
-    img = tf.image.resize_images(img, size=[536, 536], method=1)
-    label = tf.image.resize_images(label, size=[536, 536], method=1)
-
     data = tf.concat([img, label], axis=2)
-
-    data = tf.random_crop(data, size=[512, 512, 2])
 
     data = tf.image.random_flip_left_right(data)
     data = tf.image.random_flip_up_down(data)
@@ -68,15 +64,14 @@ def read_record(filename, batch_size):
     label = data[1]
 
     img = tf.cast(img, dtype=tf.float32)
-    img = tf.reshape(img, [1, 512, 512])
+    img = tf.reshape(img, [512, 512, 1])
     img = tf.image.per_image_standardization(img)
-    img = tf.reshape(img, [512, 512])
 
     min_after_dequeue = 30
     capacity = min_after_dequeue + 3 * batch_size
     img, label = tf.train.shuffle_batch([img, label],
                                         batch_size=batch_size,
-                                        num_threads=3,
+                                        num_threads=6,
                                         capacity=capacity,
                                         min_after_dequeue=min_after_dequeue)
     return img, label
@@ -93,11 +88,12 @@ if __name__ == '__main__':
     tf.train.start_queue_runners(sess=sess)
     x, y = sess.run([img, label])
 
+    x = np.reshape(x, (512, 512))
+    y = np.reshape(y, (512, 512))
     fig, ax = plt.subplots(1, 2)
-
-    ax[0].imshow(x[0])
+    ax[0].imshow(x)
     ax[0].axis('off')
 
-    ax[1].imshow(y[0], cmap='gray')
+    ax[1].imshow(y, cmap='gray')
     ax[1].axis('off')
     plt.show()
